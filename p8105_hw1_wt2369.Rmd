@@ -1,0 +1,52 @@
+---
+title: "Homework 1"
+author: "Wenxin Tian"
+date: "`r Sys.Date()`"
+output: github_document
+---
+
+# Problem 1:
+
+1. Importing data:
+
+```{r, echo = FALSE, message = FALSE}
+library(moderndive)
+library(tidyverse)
+```
+
+```{r}
+data("early_january_weather")
+```
+
+2. A glimpse at the data:
+
+```{r}
+head(early_january_weather)
+```
+
+
+3. Short description of the data:
+
+The imported data consists of weather conditions taken in early January in 2013. 
+The variables include `r colnames(early_january_weather)`. The dataset has a size of 
+`r nrow(early_january_weather)` rows and `r ncol(early_january_weather)` columns, which means 
+the data has `r ncol(early_january_weather)` variables taken across `r nrow(early_january_weather)`
+ different timepoints. Across all the timepoints, the main temperature was `r round(mean(pull(early_january_weather, temp)), digits = 2)`
+  degrees.
+  
+4. Scatter plot showing temperature and humidity across different hours:
+
+```{r}
+ggplot(
+  early_january_weather, 
+  aes(x = time_hour, y = temp, color = humid)
+  ) + geom_point()
+```
+
+5. Saving plot to project:
+
+```{r}
+ggsave("temp_humid_hour.pdf")
+```
+
+
