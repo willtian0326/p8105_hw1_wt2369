@@ -60,6 +60,7 @@ df = tibble(
   char_vec = c('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'),
   fac_vec = factor(sample(c('Green', 'Red', 'Blue'), 10, replace = TRUE))
 )
+df
 ```
 2. Taking means of each variable:
 
