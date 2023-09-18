@@ -65,10 +65,10 @@ df
 2. Taking means of each variable:
 
 ```{r}
-norm_samp_mean = mean(pull(df, norm_samp))
-norm_samp_pos_mean = mean(pull(df, norm_samp_pos))
-char_vec_mean = mean(pull(df, char_vec))
-fac_vec_mean = mean(pull(df, fac_vec))
+mean(pull(df, norm_samp))
+mean(pull(df, norm_samp_pos))
+mean(pull(df, char_vec))
+mean(pull(df, fac_vec))
 ```
 
 For random numbers from the normal distribution, a numeric mean was taken. For logical values, 
@@ -77,7 +77,7 @@ the `mean` function returned `NA`, as they are not numeric values.
 
 3. Applying `as.numeric` to variables:
 
-```{r, message = FALSE, results = 'hide'}
+```{r, message = FALSE, results = FALSE, warning = FALSE}
 as.numeric(pull(df, norm_samp_pos))
 as.numeric(pull(df, char_vec))
 as.numeric(pull(df, fac_vec))
