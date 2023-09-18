@@ -5,7 +5,7 @@ date: "`r Sys.Date()`"
 output: github_document
 ---
 
-# Problem 1:
+## Problem 1:
 
 1. Importing data:
 
@@ -49,4 +49,41 @@ ggplot(
 ggsave("temp_humid_hour.pdf")
 ```
 
+## Problem 2:
 
+1. Creating practice dataframe:
+
+```{r}
+df = tibble(
+  norm_samp = rnorm(n = 10, mean = 0, sd = 1),
+  norm_samp_pos = norm_samp > 0,
+  char_vec = c('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'),
+  fac_vec = factor(sample(c('Green', 'Red', 'Blue'), 10, replace = TRUE))
+)
+```
+2. Taking means of each variable:
+
+```{r}
+norm_samp_mean = mean(pull(df, norm_samp))
+norm_samp_pos_mean = mean(pull(df, norm_samp_pos))
+char_vec_mean = mean(pull(df, char_vec))
+fac_vec_mean = mean(pull(df, fac_vec))
+```
+
+For random numbers from the normal distribution, a numeric mean was taken. For logical values, 
+they were treated as 0's and 1's, and a mean was taken. For character vector and factor vector, 
+the `mean` function returned `NA`, as they are not numeric values.
+
+3. Applying `as.numeric` to variables:
+
+```{r, message = FALSE, results = 'hide'}
+as.numeric(pull(df, norm_samp_pos))
+as.numeric(pull(df, char_vec))
+as.numeric(pull(df, fac_vec))
+```
+
+When trying to apply `as.numeric()` to the variables, logical values were converted to 1's and 0's, 
+character vector returned `NA`s because of coercion, and factor vector returned its levels. This result
+ is consistent with what happened when I tried to take the means, since only the logical values could be 
+ converted to numeric values. However, I was surprised that even though `as.numeric()` returned levels 
+ of the factor vector, taking its mean still returned `NA`.
